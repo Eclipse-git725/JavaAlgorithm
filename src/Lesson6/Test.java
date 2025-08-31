@@ -28,12 +28,15 @@ public class Test {
 
     // 测试代码
     public static void main(String[] args) {
-        char[] arr = {'a', '1', 'c', '5', 'b', '9', '2'};
-        sortDigitsBeforeLetters(arr);
-
-        for (char c : arr) {
-            System.out.print(c + " ");
-        }
+//        char[] arr = {'a', '1', 'c', '5', 'b', '9', '2'};
+//        sortDigitsBeforeLetters(arr);
+//
+//        for (char c : arr) {
+//            System.out.print(c + " ");
+//        }
+        Integer a = 137;
+        Integer b = 137;
+        System.out.println(a == b); // 输出: true
         // 输出: 1 5 9 2 a c b
     }
 }
