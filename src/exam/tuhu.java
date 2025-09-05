@@ -2,6 +2,7 @@ package exam;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -13,7 +14,10 @@ import java.util.PriorityQueue;
 public class tuhu {
     public static void main(String[] args) {
 //        System.out.println(calc_avg_waiting_time(3, 1, new int[]{1,2,3}, new int[]{3,2,1}));
-        System.out.println(solve(5, new int[]{1, 1, 4, 4, 4}));
+//        System.out.println(solve(5, new int[]{1, 1, 4, 4, 4}));
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        list.add(4);
+        System.out.println(list.size());
     }
     static String calc_avg_waiting_time (int n, int k, int[] s_i, int[] d_i) {
         // write code here
