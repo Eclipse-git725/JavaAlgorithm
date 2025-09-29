@@ -67,27 +67,29 @@ public class ReverseNodesInKGroup{
   //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-        ListNode dummy = new ListNode(-1, head);
+        if(head == null || head.next == null) return head;
+        ListNode dummy = new ListNode(0, head);
         int n = 0;
         ListNode cur = head;
         while(cur != null) {
-            cur = cur.next;
             n ++;
+            cur = cur.next;
         }
-        ListNode pre = null;
+
         cur = head;
-        ListNode p = dummy; // 上一段的末尾
+        ListNode p = dummy; // 指向上一组翻转的结尾
+        ListNode pre = null;
         for(; n >= k; n -= k) {
-            for(int j = 0; j < k; j ++ ) {
+            for(int i = 0; i < k; i ++ ) {
                 ListNode nxt = cur.next;
                 cur.next = pre;
                 pre = cur;
                 cur = nxt;
             }
-            ListNode t = p.next;
+            ListNode p0 = p.next;
             p.next.next = cur;
             p.next = pre;
-            p = t;
+            p = p0;
         }
         return dummy.next;
     }
