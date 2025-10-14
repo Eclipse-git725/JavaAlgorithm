@@ -41,27 +41,28 @@
 //
 // Related Topics 数组 分治 动态规划 👍 7153 👎 0
 
-  
+
 package leetcode.editor.cn;
-public class MaximumSubarray{
-  public static void main(String[] args) {
-       Solution solution = new MaximumSubarray().new Solution();
-  }
-  //leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int maxSubArray(int[] nums) {
-        int n = nums.length;
-        int sum = 0;
-        int ans = Integer.MIN_VALUE;
-        int minv = 0;
-        for(int i = 0; i < n; i ++ ) {
-            sum += nums[i];
-            ans = Math.max(ans, sum - minv);
-            minv = Math.min(minv, sum);
-        }
-        return ans;
+
+public class MaximumSubarray {
+    public static void main(String[] args) {
+        Solution solution = new MaximumSubarray().new Solution();
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int maxSubArray(int[] nums) {
+            int sum = 0;
+            int minPre = 0;
+            int ans = Integer.MIN_VALUE;
+            for(int i = 0; i < nums.length; i ++ ) {
+                sum += nums[i];
+                ans = Math.max(ans, sum - minPre);
+                minPre = Math.min(minPre, sum);
+            }
+            return ans;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
