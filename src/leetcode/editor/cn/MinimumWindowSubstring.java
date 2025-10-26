@@ -66,27 +66,28 @@ public class MinimumWindowSubstring {
         public String minWindow(String s1, String t1) {
             char[] s = s1.toCharArray();
             char[] t = t1.toCharArray();
-            int[] chs = new int[200];
-            int[] cht = new int[200];
-            for(int i = 0; i < t.length; i ++ ) {
-                cht[t[i]] ++;
-            }
+            int[] ch1 = new int[200];
+            int[] ch2 = new int[200];
             String ans = s1;
-            int l = 0,r = 0;
+            for(int i = 0; i < t1.length(); i ++ ) {
+                ch2[t[i]] ++;
+            }
+
+            int l = 0, r = 0;
             boolean f = false;
             while(r < s.length) {
-                chs[s[r]] ++;
-                boolean flag = true;
+                ch1[s[r]] ++;
+                boolean f1 = true;
                 for(int i = 0; i < 200; i ++ ) {
-                    if(chs[i] < cht[i]) {
-                        flag = false;
+                    if(ch1[i] < ch2[i]) {
+                        f1 = false;
                         break;
                     }
                 }
-                if(flag) {
+                if(f1) {
                     f = true;
-                    while(l < r && chs[s[l]] > cht[s[l]]) {
-                        chs[s[l]] --;
+                    while(l < r && ch1[s[l]] > ch2[s[l]]) {
+                        ch1[s[l]] --;
                         l ++;
                     }
                     if(r - l + 1 < ans.length()) {
