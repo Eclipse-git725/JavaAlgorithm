@@ -39,29 +39,15 @@ class Solution {
         int n = a.length(), m = b.length();
         int i = n - 1, j = m - 1;
         StringBuilder ans = new StringBuilder();
-        int r = 0;
-        while(i >= 0 && j >= 0) {
-            int c = Integer.valueOf(a.charAt(i) - '0');
-            int d = Integer.valueOf(b.charAt(j) - '0');
-            ans.append(((c + d + r) % 2));
-            r = (c + d + r) / 2;
+        int carry = 0;
+        while(i >= 0 || j >= 0 || carry > 0) {
+            int num1 = i >= 0 ? a.charAt(i) - '0' : 0;
+            int num2 = j >= 0 ? b.charAt(j) - '0' : 0;
+            int c = num1 + num2 + carry;
+            ans.append(c % 2);
+            carry = c / 2;
             i --;
             j --;
-        }
-        while(i >= 0) {
-            int c = Integer.valueOf(a.charAt(i) - '0');
-            ans.append((c + r) % 2);
-            r = (c + r) / 2;
-            i --;
-        }
-        while(j >= 0) {
-            int c = Integer.valueOf(b.charAt(j) - '0');
-            ans.append((c + r) % 2);
-            r = (c + r) / 2;
-            j --;
-        }
-        if(r != 0) {
-            ans.append('1');
         }
         ans.reverse();
         return ans.toString();
