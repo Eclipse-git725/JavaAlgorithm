@@ -47,36 +47,75 @@
 
 package leetcode.editor.cn;
 
+import java.awt.*;
+
 public class SearchInRotatedSortedArray {
     public static void main(String[] args) {
         Solution solution = new SearchInRotatedSortedArray().new Solution();
+        int[] nums = new int[]{5, 1, 3};
+        solution.search(nums, 3);
     }
+
+//    class Solution {
+//        public int search(int[] nums, int target) {
+//            int n = nums.length;
+//            int l = 0, r = n - 1;
+//            while(l <= r) {
+//                int mid = (l + r) >> 1;
+//                if(nums[mid] == target) return mid;
+//                if(nums[l] <= nums[mid]) {
+//                    // l~mid 有序
+//                    if(nums[l] <= target && nums[mid] > target) {
+//                        r = mid - 1;
+//                    }else {
+//                        l = mid + 1;
+//                    }
+//                }else {
+//                    // mid~r 有序
+//                    if(nums[mid] < target && target <= nums[r]) {
+//                        l = mid + 1;
+//                    }else {
+//                        r = mid - 1;
+//                    }
+//                }
+//            }
+//            return -1;
+//        }
+//    }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int search(int[] nums, int target) {
             int n = nums.length;
-            int l = 0, r = n - 1;
-            while(l <= r) {
+            int l = -1, r = n - 1;
+            // 先找到数组中最小的下标
+            while(l + 1 < r) {
                 int mid = (l + r) >> 1;
-                if(nums[mid] == target) return mid;
-                if(nums[l] <= nums[mid]) {
-                    // l~mid 有序
-                    if(nums[l] <= target && nums[mid] > target) {
-                        r = mid - 1;
-                    }else {
-                        l = mid + 1;
-                    }
+                if(nums[mid] < nums[n - 1]) {
+                    r = mid;
                 }else {
-                    // mid~r 有序
-                    if(nums[mid] < target && target <= nums[r]) {
-                        l = mid + 1;
-                    }else {
-                        r = mid - 1;
-                    }
+                    l = mid;
                 }
             }
-            return -1;
+            int i = r;
+
+            if(target <= nums[n - 1]) {
+                l = i - 1;
+                r = n;
+            }else {
+                l = -1;
+                r = i;
+            }
+            // 再次二分寻找target位置
+            while(l + 1 < r) {
+                int mid = (l + r) >> 1;
+                if(target <= nums[mid]) {
+                    r = mid;
+                }else {
+                    l = mid;
+                }
+            }
+            return nums[r] == target ? r : -1;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
